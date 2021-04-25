@@ -1,0 +1,32 @@
+{
+   "route":{
+       "details" : [
+           {
+               "shipType":"Oil Container",
+               "shipName": "Greater Magnus",
+               "port_name_from":"Odessa",
+               "port_country_from":"UA",
+               "port_name_to":"Paranagua",
+               "port_country_to":"BR"
+           },
+           
+           {
+               "shipType":"Cargo ship",
+               "shipName": "EL Carla",
+               "port_name_from":"Swi",
+               "port_country_from":"USA",
+               "port_name_to":"Panama",
+               "port_country_to":"NRG"
+           },
+           
+           {
+               "shipType":"Ice Breaker",
+               "shipName": "Venedict LSP",
+               "port_name_from":"PortOfJustice",
+               "port_country_from":"SA",
+               "port_name_to":"LAPort",
+               "port_country_to":"BR"
+           }
+       ]
+   }
+}
