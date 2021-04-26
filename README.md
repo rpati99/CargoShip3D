@@ -5,4 +5,4 @@ SceneKit to implement Cargo ship model. (Some resources for free 3d models:- fre
 Custom ViewController transitioning methods for circular effect.
 CADisplayLink to provide counting animation on main screen.
 
-![](ezgif-4-adb812682b3e.gif)
+![](ezgif-1-b41de943d644.gif)
