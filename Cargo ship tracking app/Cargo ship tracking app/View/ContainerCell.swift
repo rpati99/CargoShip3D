@@ -9,8 +9,7 @@ import UIKit
 
 
 class ContainerCell: UICollectionViewCell {
-    
-    
+
     var containerInfo: Detail? {
         didSet {
             guard let containerInfo = containerInfo else { return }

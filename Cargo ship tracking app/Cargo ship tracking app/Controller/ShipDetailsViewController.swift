@@ -8,23 +8,13 @@
 import UIKit
 import SceneKit
 
-
-extension URL {
-      func withQueries(_ queries: [String: String]) -> URL? {
-        var components = URLComponents(url: self, resolvingAgainstBaseURL: true)
-        components?.queryItems = queries.map({ URLQueryItem(name: $0.0, value: $0.1) })
-        return components?.url
-    }
-}
-
 class ShipDetailsViewController: UIViewController  {
     
+    var scnView: SCNView!
+    var baseNode: SCNNode!
+    var details: [Detail]!
     
-    private var scnView: SCNView!
-    private var baseNode: SCNNode!
-    private var details: [Detail]!
-    
-    private let descriptionLabel: UILabel = {
+    let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "InsaniburgerwithCheese", size: 60)
         label.text = "Discover \nmore Vessels"
@@ -37,7 +27,7 @@ class ShipDetailsViewController: UIViewController  {
     }()
     
     
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -55,7 +45,6 @@ class ShipDetailsViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         configureScene()
         configureCollectionView()
@@ -133,12 +122,9 @@ class ShipDetailsViewController: UIViewController  {
         gradient.locations = [0.1, 1.0]
         view.layer.addSublayer(gradient)
 
-    
         view.addSubview(descriptionLabel)
         descriptionLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 16, paddingRight: 16 )
 
-       
-        
         let cloud = UIImageView(frame: CGRect(x: 0, y: 105, width: 200, height: 200))
         cloud.contentMode = .scaleAspectFill
         cloud.image = UIImage(named: "Cloud")
@@ -157,47 +143,4 @@ class ShipDetailsViewController: UIViewController  {
 }
 
 
-
-// MARK: -  UICollectionViewDelegate & UICollectionViewDataSource methods
-
-extension ShipDetailsViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return details.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellid", for: indexPath) as! ContainerCell
-        cell.containerInfo = details[indexPath.row]
-        cell.transform = CGAffineTransform(scaleX: 0.9, y: 1.0)
-        return cell
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: collectionView.frame.height)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if let collectionView = scrollView as? UICollectionView {
-            for cell in collectionView.visibleCells {
-                UIView.animate(withDuration: 0.2) {
-                    cell.layer.position.y += 100
-                } completion: { (true) in
-                        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 2.5, initialSpringVelocity: 1.0, options: [.curveEaseOut]) {
-                            cell.layer.position.y -= 100
-                    }
-                }
-            }
-        }
-    }
-}
 
