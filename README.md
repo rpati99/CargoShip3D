@@ -1,6 +1,6 @@
 # CargoShip3D
 
-Fun way to view JSON data whilst a 3D model of ship moving in background.
+Fun and intuitive way to view JSON data whilst a 3D model of ship moving in background.
 
 - Some insights
 Utilizes in-built JSON to provide data.
